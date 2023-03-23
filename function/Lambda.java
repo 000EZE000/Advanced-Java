@@ -1,6 +1,6 @@
 
 import java.util.List;
-//import java.util.stream.Collectors;
+import java.util.stream.Collectors;
 
 
 
@@ -17,7 +17,7 @@ public class Lambda {
         cities.stream().parallel().forEach(city -> System.out.println(city));
 
         // save data
-        //List<String> citiesFilter = cities.stream().filter(city-> city.startsWith("F")).collect(Collectors.toList());
+        List<String> citiesFilter = cities.stream().filter(city-> city.startsWith("F")).collect(Collectors.toList());
         
     }
 
