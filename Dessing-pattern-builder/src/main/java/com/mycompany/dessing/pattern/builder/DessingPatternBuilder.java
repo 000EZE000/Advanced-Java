@@ -4,7 +4,7 @@
 
 package com.mycompany.dessing.pattern.builder;
 
-import com.mycompany.dessing.pattern.builder.Person;
+
 
 /**
  *

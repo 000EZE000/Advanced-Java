@@ -4,8 +4,7 @@
  */
 package com.mycompany.dessing.pattern.builder;
 
-import java.util.Objects;
-import java.util.logging.Logger;
+
 
 /**
  *
