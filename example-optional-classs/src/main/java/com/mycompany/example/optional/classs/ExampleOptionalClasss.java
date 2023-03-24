@@ -16,7 +16,7 @@ import java.util.Optional;
 public class ExampleOptionalClasss {
 
     public static void main(String[] args) {
-        Optional average = averageScores(1.2,9.2, 5.6);
+        Optional<Double> average = averageScores(1.2,9.2, 5.6);
         if(average.isEmpty()){
             System.out.println("this emptiness");
            
