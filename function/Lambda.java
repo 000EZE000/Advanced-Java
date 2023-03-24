@@ -18,7 +18,7 @@ public class Lambda {
 
         // save data
         List<String> citiesFilter = cities.stream().filter(city-> city.startsWith("F")).collect(Collectors.toList());
-        
+        System.out.println(citiesFilter);
     }
 
 
