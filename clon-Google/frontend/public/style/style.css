@@ -1,0 +1,25 @@
+#logo{
+    width: 300px;
+    top: 20px;
+    position: relative;
+    margin: 5px;
+ 
+}
+#main{
+    width: 500px;
+    margin: auto;
+    text-align: center;
+
+}
+.button-main{
+    padding: 8px 15px;
+}
+#search{
+    width: 90%;
+    margin: 20px;
+    height: 30px;
+    border-radius: 15px;
+    border-color: #CCC;
+    padding-left: 15px;
+    font-size: 18px;
+}
