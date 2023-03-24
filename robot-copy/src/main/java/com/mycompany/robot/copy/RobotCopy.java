@@ -33,7 +33,10 @@ public class RobotCopy {
         second.join();
         System.out.println(count.count + "");
  
-     
+        atomic();
+    
+        getWebsContent(getLinks());
+        time(getLinks());
     }
     
     static class Count extends Thread {
@@ -46,7 +49,7 @@ public class RobotCopy {
     }
     
     
-   private List<String> getLinks(){
+   private static List<String> getLinks(){
      List<String> links = new ArrayList<>();
      links.add("https://www.bbc.com/sport/live/football/65028436");    
      links.add("https://www.bbc.com/news/world-asia-india-65048602");
@@ -58,7 +61,7 @@ public class RobotCopy {
    }
     
    
-   private void getWebsContent(List<String> links){
+   private static void getWebsContent(List<String> links){
         links.stream().parallel().forEach(link->System.out.println(getWebContent(link)) );
    }
    
@@ -67,7 +70,7 @@ public class RobotCopy {
        try{
             URL url = new URL(link);
             HttpURLConnection connect = (HttpURLConnection) url.openConnection();
-            String encoding = connect.getContentEncoding();
+           // String encoding = connect.getContentEncoding();
             InputStream input = connect.getInputStream();
             //download webs 
             String result = new BufferedReader(new InputStreamReader(input))
