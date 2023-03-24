@@ -9,11 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -22,11 +21,32 @@ import java.util.stream.Collectors;
  */
 public class RobotCopy {
 
-    public static void main(String[] args) throws IOException  {
-        
-     String webs = getWebContent("https://www.bbc.com");
-     System.out.println(webs);
-        
+    public static void main(String[] args) throws Exception  {
+        Count count = new Count();       
+        Thread first = new Thread(count, "first");        
+        Thread second = new Thread(count, "first");
+
+        first.start();
+        second.start();
+       
+        first.join();
+        second.join();
+        System.out.println(count.count + "");
+ 
+     
+    }
+    
+    static class Count extends Thread {
+        public AtomicInteger count = new AtomicInteger(0);
+        public void run(){
+            for(int i=0; i < 100_000_000 ; i++){
+                count.addAndGet(1);
+            }
+        } 
+    }
+    
+    
+   private List<String> getLinks(){
      List<String> links = new ArrayList<>();
      links.add("https://www.bbc.com/sport/live/football/65028436");    
      links.add("https://www.bbc.com/news/world-asia-india-65048602");
@@ -34,14 +54,14 @@ public class RobotCopy {
      links.add("https://www.bbc.com/culture/article/20230321-succession-season-4-a-jaw-dropping-finale");
      links.add("https://www.bbc.com/travel/article/20230322-toheroa-a-fabled-shellfish-that-nearly-vanished");
      links.add("https://www.bbc.com/news/world-australia-65048226");
-
- 
-     links.stream().parallel().forEach(link->System.out.println(getWebContent(link)) );
-  
-
-
-     
-    }
+     return links;
+   }
+    
+   
+   private void getWebsContent(List<String> links){
+        links.stream().parallel().forEach(link->System.out.println(getWebContent(link)) );
+   }
+   
      //Download Webs
    private static String getWebContent(String link) {
        try{
@@ -73,8 +93,10 @@ public class RobotCopy {
      System.out.println("time fast " + (timeEnd - timeStart));
    }
    
-   private static void atomic(){
-       
+   private static void atomic() throws Exception{
+       System.out.println("Start");
+       Thread.sleep(2000);
+       System.out.println("End");
    }
   
 }
